@@ -1,0 +1,91 @@
+<div>
+  <p *ngIf="editMode" class="font-bold text-xl">
+    Editing details for: {{ item.name }}
+  </p>
+  <form #itemForm="ngForm" (ngSubmit)="onSubmit()">
+    <label for="name" class="form-label">Item name</label>
+    <input
+      type="text"
+      name="name"
+      id="name"
+      [(ngModel)]="name"
+      class="form-element"
+    />
+    <br />
+    <label for="description" class="form-label">Item Description</label>
+    <input
+      type="text"
+      name="description"
+      id="description"
+      [(ngModel)]="description"
+      class="form-element"
+    />
+    <br />
+    <label for="currentQuantity" class="form-label">Current Quantity</label>
+    <input
+      type="number"
+      name="currentQuantity"
+      id="currentQuantity"
+      [(ngModel)]="currentQuantity"
+      class="form-element"
+      min="0"
+      max="5000"
+    />
+    <br />
+    <label for="buildToQuantity" class="form-label">Build to Quantity</label>
+    <input
+      type="number"
+      name="buildToQuantity"
+      id="buildToQuantity"
+      [(ngModel)]="buildToQuantity"
+      class="form-element"
+      min="1"
+      max="5000"
+    />
+    <br />
+    <label for="incrementAmount" class="form-label">Increment Amount</label>
+    <input
+      type="number"
+      name="incrementAmount"
+      id="incrementAmount"
+      [(ngModel)]="incrementAmount"
+      class="form-element"
+      min="1"
+      max="5000"
+    />
+    <br />
+    <label for="caseQuantity" class="form-label">Items per Case</label>
+    <input
+      type="number"
+      name="caseQuantity"
+      id="caseQuantity"
+      [(ngModel)]="caseQuantity"
+      class="form-element"
+      min="1"
+      max="5000"
+    />
+    <br />
+    <label for="caseCost" class="form-label">Cost per Case</label>
+    <input
+      type="number"
+      name="caseCost"
+      id="caseCost"
+      [(ngModel)]="caseCost"
+      class="form-element"
+      min="1"
+      max="10000"
+    />
+    <br />
+    <label for="isActive" class="form-label">Item Status</label>
+    <select
+      class="form-element"
+      name="isActive"
+      id="isActive"
+      [(ngModel)]="isActive"
+    >
+      <option value="true" selected>Active</option>
+      <option value="false">Inactive</option>
+    </select>
+    <button class="bg-blue-200 p-2 rounded-lg m-4" type="submit">Submit</button>
+  </form>
+</div>

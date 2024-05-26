@@ -1,0 +1,14 @@
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+  @for (item of items; track item) {
+  <div class="mx-auto flex flex-col items-center border-2 border-gray-200 p-4">
+    <qrcode
+      [qrdata]="generateUrlForQrCode(item)"
+      [width]="256"
+      [errorCorrectionLevel]="'M'"
+    ></qrcode>
+    <span class="text-2xl">{{ item.name }}</span
+    ><br />
+    <span class="text-xl">Build to amount: {{ item.buildToQuantity }}</span>
+  </div>
+  }
+</div>

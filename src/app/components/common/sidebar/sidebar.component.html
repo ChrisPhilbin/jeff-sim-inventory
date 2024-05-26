@@ -1,0 +1,16 @@
+<input
+  id="search"
+  name="search"
+  class="border-2 border-gray-200 rounded-md h-10 p-4 inline mt-2 w-2/3"
+  placeholder="Quick search"
+  (ngModelChange)="searchItems($event)"
+  [(ngModel)]="searchTerm"
+/>
+<div class="mt-6 tracking-wide">
+  @for(item of items; track item) {
+  <div class="border-b-2 cursor-pointer" (click)="navigateToItem(item.id)">
+    {{ item.name }}
+  </div>
+  <br />
+  }
+</div>
