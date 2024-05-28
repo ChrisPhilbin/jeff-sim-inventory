@@ -3,14 +3,49 @@ import { ItemDetailsComponent } from './components/item/item-details/item-detail
 import { ItemFormComponent } from './components/item/item-form/item-form.component';
 import { ItemIndexComponent } from './components/item/item-index/item-index.component';
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
-import { QrCodeScanComponent } from './components/qr-code/qr-code-scan/qr-code-scan.component';
+import { AuthComponent } from './components/auth/auth.component';
+import { redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+
+const redirectUnathorized = () => redirectUnauthorizedTo(['/auth']);
 
 export const routes: Routes = [
-  { path: '', component: ItemIndexComponent, pathMatch: 'full' },
-  { path: 'items/new', component: ItemFormComponent },
-  { path: 'items/:itemId', component: ItemDetailsComponent },
-  { path: 'items/:itemId/edit', component: ItemFormComponent },
-  { path: 'code', component: QrCodeComponent },
-  { path: 'code/scan', component: QrCodeScanComponent },
-  { path: 'code/:itemId', component: QrCodeComponent },
+  {
+    path: '',
+    component: ItemIndexComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'items/new',
+    component: ItemFormComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'items/:itemId',
+    component: ItemDetailsComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'items/:itemId/edit',
+    component: ItemFormComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'code',
+    component: QrCodeComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'code/scan',
+    loadComponent: () =>
+      import('./components/qr-code/qr-code-scan/qr-code-scan.component').then(
+        (m) => m.QrCodeScanComponent
+      ),
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'code/:itemId',
+    component: QrCodeComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  { path: 'auth', component: AuthComponent },
 ];
