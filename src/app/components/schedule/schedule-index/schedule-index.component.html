@@ -1,0 +1,45 @@
+<div class="grid grid-cols-1">
+  <div>
+    <button
+      (click)="navigateToCreateSchedule()"
+      class="my-4 rounded-lg bg-blue-200 text-black p-2 mr-1"
+    >
+      New Schedule
+    </button>
+  </div>
+</div>
+@if (schedules.length) {
+<p-table [value]="schedules" styleClass="p-datatable-striped">
+  <ng-template pTemplate="header">
+    <tr>
+      <th>Schdule Date</th>
+      <th>Topics</th>
+      <th>Number of Topics</th>
+      <th>Number of Groups</th>
+      <th>Number of Students</th>
+      <th>Number Instructors</th>
+      <th>Number of Rooms</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-schedule>
+    <tr (click)="navigateToSchedule(schedule.id)" class="cursor-pointer">
+      <td>{{ schedule.date }}</td>
+      <td>
+        {{
+          generateListOfTopicNames(schedule.topics).length > 50
+            ? (generateListOfTopicNames(schedule.topics) | slice : 0 : 50) +
+              "..."
+            : generateListOfTopicNames(schedule.topics)
+        }}
+      </td>
+      <td>{{ schedule.topics.length }}</td>
+      <td>{{ schedule.groups.length }}</td>
+      <td>{{ schedule.numberOfStudents }}</td>
+      <td>{{ schedule.instructors.length }}</td>
+      <td>{{ schedule.rooms.length }}</td>
+    </tr>
+  </ng-template>
+</p-table>
+} @else {
+<app-loading></app-loading>
+}

@@ -4,11 +4,12 @@ import { FormsModule } from '@angular/forms';
 import { ItemService } from '../../../service/items/item.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { switchMap } from 'rxjs';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-item-form',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CommonModule],
   templateUrl: './item-form.component.html',
   styleUrl: './item-form.component.scss',
 })

@@ -5,12 +5,24 @@ import { ItemIndexComponent } from './components/item/item-index/item-index.comp
 import { QrCodeComponent } from './components/qr-code/qr-code.component';
 import { AuthComponent } from './components/auth/auth.component';
 import { redirectUnauthorizedTo, canActivate } from '@angular/fire/auth-guard';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { ScheduleIndexComponent } from './components/schedule/schedule-index/schedule-index.component';
 
 const redirectUnathorized = () => redirectUnauthorizedTo(['/auth']);
 
 export const routes: Routes = [
   {
     path: '',
+    component: DashboardComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'schedules',
+    component: ScheduleIndexComponent,
+    ...canActivate(redirectUnathorized),
+  },
+  {
+    path: 'items',
     component: ItemIndexComponent,
     ...canActivate(redirectUnathorized),
   },
